@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<book id="1" status="PUBLISHED" title="TDD" description="tdd in practice..."
+		author="Camilo Lopes" cover_URL="not defined" year_Published="2012"
+		total_Page="150" ISBN="123456789" />
+		<book id="2" status="DRAFT" title="AngularJS" description="AngularJS é um framework..."
+		author="Edson" cover_URL="not defined" year_Published="2013"
+		total_Page="150" ISBN="1234567878959" />
+		
+		<book id="3" status="PUBLISHED" title="Ruby on rails" description="Ruby..."
+		author="João" cover_URL="not defined" year_Published="2013"
+		total_Page="250" ISBN="1234567452146" />
+		
+		<book id="4" status="PUBLISHED" title="Ruby na prática" description="Ruby..."
+		author="Alberto" cover_URL="not defined" year_Published="2014"
+		total_Page="150" ISBN="1234567452146741" />
+</dataset>
