@@ -1,0 +1,6 @@
+{
+  "name": "Cadastro-livro-estudo",
+  "tagline": "Estudo Spring Angular - Cadastro de Livros",
+  "body": "# Yeoman\r\n\r\nyo angular\r\n\r\nhttps://github.com/yeoman/generator-angular\r\n\r\n(npm install -g  bower yo generator-karma generator-angular)\r\n\r\n# Template\r\n\r\nhttps://startbootstrap.com/template-overviews/sb-admin-2/\r\n\r\n# Teste\r\n\r\n### Para rodar o teste, execute:\r\n`mvn test -P test`\r\n> O profile default não executa teste automaticamente. Isso foi feito para agilizar o build do projeto. `mvn test` sozinho irá skipped devido a configuração no surefire.\r\n\r\n# Rodando a aplicação\r\n\r\n`mvn jetty:run`\r\n\r\nUse o endereço: [http://localhost:8080/app/index.html#/](http://localhost:8080/app/index.html#/)",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
