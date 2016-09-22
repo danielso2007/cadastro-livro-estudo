@@ -2,14 +2,13 @@
 
 /**
  * @ngdoc overview
- * @name webappApp
+ * @name app
  * @description
- * # webappApp
+ * # app
  *
  * Main module of the application.
  */
-angular
-  .module('webappApp', [
+var app = angular.module('app', [
     'ngAnimate',
     'ngAria',
     'ngCookies',
@@ -17,9 +16,13 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
+    'ngTouch',
+    'app.book',
+    'app.main'
+  ]);
+
+
+app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -29,9 +32,9 @@ angular
       .when('/ebookRegister', {
         templateUrl: 'views/ebookregister.html',
         controller: 'EbookregisterCtrl',
-        controllerAs: 'ebookRegister'
+        controllerAs: 'bookScope'
       })
       .otherwise({
         redirectTo: '/'
       });
-  });
+});

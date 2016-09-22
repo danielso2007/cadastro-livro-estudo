@@ -19,8 +19,9 @@ import org.springframework.stereotype.Controller;
 
 import br.com.estudo.cadastrolivros.interfaces.services.BookService;
 import br.com.estudo.cadastrolivros.modal.domain.Book;
+import org.springframework.web.bind.annotation.RestController;
 
-@Resource
+@RestController
 @Path("/book")
 public class BookResource {
 

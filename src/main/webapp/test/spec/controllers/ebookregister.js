@@ -3,7 +3,7 @@
 describe('Controller: EbookregisterCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('webappApp'));
+  beforeEach(module('app.book'));
 
   var EbookregisterCtrl,
     scope;

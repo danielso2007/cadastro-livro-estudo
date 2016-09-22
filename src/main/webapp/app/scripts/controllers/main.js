@@ -2,16 +2,14 @@
 
 /**
  * @ngdoc function
- * @name webappApp.controller:MainCtrl
+ * @name app.main.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the webappApp
+ * Controller of the app.main
  */
-angular.module('webappApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+var app_main = angular.module('app.main', []);
+
+
+app_main.controller('MainCtrl', function () {
+
+});

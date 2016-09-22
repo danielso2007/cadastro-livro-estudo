@@ -1,75 +1,132 @@
 <div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Cadastro de Livros</h1>
-    </div>
-    <!-- /.col-lg-12 -->
+  <div class="col-lg-12">
+    <h1 class="page-header">Cadastro de Livros</h1>
+  </div>
+  <!-- /.col-lg-12 -->
 </div>
 
 <div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <!--<div class="panel-heading">-->
-                <!--Cadastro de Livros-->
-            <!--</div>-->
-            <div class="panel-body">
-                <div class="row">
-                    <form role="form">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Titulo</label>
-                                <input class="form-control" ng-model="book.title" placeholder="Informe o titulo do livro">
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Autor(es)</label>
-                                <input class="form-control" placeholder="Camilo Lopes, Paulo Coelho" ng-model="book.author">
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>ISBN</label>
-                                <input class="form-control" placeholder="Informe o ISBN livro" ng-model="book.isbn">
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label>Ano de publicação</label>
-                                <input class="form-control" placeholder="Publicação" ng-model="book.yearPublished">
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label>Total de Páginas</label>
-                                <input class="form-control" type="number" placeholder="Páginas" ng-model="book.totalPage">
-                            </div>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="form-group">
-                                <label>Capa Url</label>
-                                <input class="form-control" type="url" placeholder="Informe a URL da capa" ng-model="book.coverUrl">
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label>Descrição Resumida</label>
-                                <textarea class="form-control" rows="3" ng-model="book.description"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <button type="submit" class="btn btn-success" ng-click="ebookRegister.save()">Salvar</button>
-                            <button type="reset" class="btn btn-default">Limpar</button>
-                        </div>
-                    </form>
-                </div>
 
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <!--<div class="panel-heading">-->
+      <!--Cadastro de Livros-->
+      <!--</div>-->
+      <div class="panel-body">
+        <div class="row">
+          <form role="form">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label>Titulo</label>
+                <input class="form-control" ng-model="bookScope.book.title" placeholder="Informe o titulo do livro">
+              </div>
             </div>
-            <!-- /.row (nested) -->
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label>Autor(es)</label>
+                <input class="form-control" placeholder="Informe nome do Autor(a) ou Autores" ng-model="bookScope.book.author">
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label>ISBN</label>
+                <input class="form-control" placeholder="Informe o ISBN livro" ng-model="bookScope.book.isbn">
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label>Ano de publicação</label>
+                <input class="form-control" placeholder="Publicação" ng-model="bookScope.book.yearPublished">
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label>Total de Páginas</label>
+                <input class="form-control" type="number" placeholder="Páginas" ng-model="bookScope.book.totalPage">
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="form-group">
+                <label>Capa Url</label>
+                <input class="form-control" type="url" placeholder="Informe a URL da capa" ng-model="bookScope.book.coverUrl">
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label>Descrição Resumida</label>
+                <textarea class="form-control" rows="3" ng-model="bookScope.book.description"></textarea>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <button type="submit" class="btn btn-success" ng-click="bookScope.save()">Salvar</button>
+              <button type="reset" class="btn btn-default">Limpar</button>
+            </div>
+          </form>
         </div>
-        <!-- /.panel-body -->
+
+      </div>
+      <!-- /.row (nested) -->
     </div>
-    <!-- /.panel -->
+    <!-- /.panel-body -->
+  </div>
+  <!-- /.panel -->
 </div>
 <!-- /.col-lg-12 -->
+
+
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Livros Cadastrados
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+          <th>Código</th>
+          <th>Titulo</th>
+          <th>Ano</th>
+          <th>ISBN</th>
+          <th>Autor(es)</th>
+          <th>Status</th>
+          <th width="20px">Excluir</th>
+          <th width="20px">Editar</th>
+          </thead>
+          <tbody>
+          <tr ng-repeat="item in bookScope.listBooks | orderBy: 'title'">
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.yearPublished}}</td>
+            <td>{{item.isbn}}</td>
+            <td>{{item.author}}</td>
+            <td>{{item.status}}</td>
+            <td>
+              <a href ng-click="bookScope.edit(book)" title="editar">
+                <div class="btn">
+                  <span class="glyphicon glyphicon-edit"></span
+                </div>
+              </a>
+            </td>
+            <td>
+              <a href ng-click="bookScope.remove(book)" title="remover">
+                <div class="btn">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </div>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <!-- /.row (nested) -->
+    </div>
+    <!-- /.panel-body -->
+
+    <!-- /.panel -->
+  </div>
+</div>
+
 </div>
 <!-- /.row -->
