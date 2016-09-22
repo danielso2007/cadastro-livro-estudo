@@ -6,8 +6,8 @@ import br.com.estudo.cadastrolivros.modal.domain.Book;
 
 public interface BookService extends GenericService<Book> {
 
-	Book getById(int id);
+    Book getById(Long id);
 
-	List<Book> search(String description);
+    List<Book> search(String description);
 
 }

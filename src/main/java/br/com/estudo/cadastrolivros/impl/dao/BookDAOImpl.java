@@ -1,7 +1,5 @@
 package br.com.estudo.cadastrolivros.impl.dao;
 
-import java.util.List;
-
 import br.com.estudo.cadastrolivros.enums.StatusBookEnum;
 import br.com.estudo.cadastrolivros.interfaces.dao.BookDAO;
 import br.com.estudo.cadastrolivros.modal.domain.Book;
@@ -11,29 +9,34 @@ import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class BookDAOImpl extends GenericHibernateDAO<Book> implements BookDAO {
 
-	public BookDAOImpl() {
-		super(Book.class);		
-	}
+    public static final String STATUS = "status";
+    public static final String TITLE = "title";
+    public static final String AUTHOR = "author";
 
-	public Book getById(int id) {
-			Book book = (Book) getCurrentSession().get(Book.class, id);
-		return book;
-	}
+    public BookDAOImpl() {
+        super();
+    }
 
-	public List<Book> searchBook(String description) {
-			Criteria criteria = getCurrentSession().createCriteria(Book.class);
-			criteria.add(Restrictions.eq("status", StatusBookEnum.PUBLISHED));
-				Criterion title = Restrictions.ilike("title", description,MatchMode.ANYWHERE);
-				Criterion author = Restrictions.ilike("author", description,MatchMode.ANYWHERE);
-				LogicalExpression orExpression = Restrictions.or(title,author);
-				criteria.add(orExpression);		
-				
-		return criteria.list();
-	}
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public List<Book> searchBook(String description) {
+        Criteria criteria = getCurrentSession().createCriteria(Book.class);
+        criteria.add(Restrictions.eq(STATUS, StatusBookEnum.PUBLISHED));
+        Criterion title = Restrictions.ilike(TITLE, description, MatchMode.ANYWHERE);
+        Criterion author = Restrictions.ilike(AUTHOR, description, MatchMode.ANYWHERE);
+        LogicalExpression orExpression = Restrictions.or(title, author);
+        criteria.add(orExpression);
 
-	
+        return criteria.list();
+    }
+
+
 }

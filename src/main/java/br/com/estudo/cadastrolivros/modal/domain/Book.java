@@ -15,7 +15,7 @@ public class Book implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "TITLE", length = 100, unique = true)
     private String title;
@@ -27,7 +27,7 @@ public class Book implements java.io.Serializable {
     private String author;
 
     @Column(name = "TOTAL_PAGE")
-    private Integer totalPage;
+    private Long totalPage;
 
     @Column(name = "ISBN", length = 45)
     private String isbn;
@@ -45,11 +45,11 @@ public class Book implements java.io.Serializable {
     public Book() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -81,11 +81,11 @@ public class Book implements java.io.Serializable {
     }
 
 
-    public Integer getTotalPage() {
+    public Long getTotalPage() {
         return this.totalPage;
     }
 
-    public void setTotalPage(Integer totalPage) {
+    public void setTotalPage(Long totalPage) {
         this.totalPage = totalPage;
     }
 
@@ -130,18 +130,14 @@ public class Book implements java.io.Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((author == null) ? 0 : author.hashCode());
-        result = prime * result
-                + ((coverUrl == null) ? 0 : coverUrl.hashCode());
-        result = prime * result
-                + ((description == null) ? 0 : description.hashCode());
+        result = prime * result + ((coverUrl == null) ? 0 : coverUrl.hashCode());
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
         result = prime * result + ((status == null) ? 0 : status.hashCode());
         result = prime * result + ((title == null) ? 0 : title.hashCode());
-        result = prime * result
-                + ((totalPage == null) ? 0 : totalPage.hashCode());
-        result = prime * result
-                + ((yearPublished == null) ? 0 : yearPublished.hashCode());
+        result = prime * result + ((totalPage == null) ? 0 : totalPage.hashCode());
+        result = prime * result + ((yearPublished == null) ? 0 : yearPublished.hashCode());
         return result;
     }
 
@@ -202,4 +198,18 @@ public class Book implements java.io.Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", author='" + author + '\'' +
+                ", totalPage=" + totalPage +
+                ", isbn='" + isbn + '\'' +
+                ", status=" + status +
+                ", yearPublished='" + yearPublished + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                '}';
+    }
 }

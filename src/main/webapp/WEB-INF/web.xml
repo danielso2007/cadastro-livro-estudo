@@ -16,7 +16,7 @@
   <init-param>
    <param-name>com.sun.jersey.spi.spring.container.servlet.SpringServlet</param-name>
    <!-- package controller update of your -->
-   <param-value>br.com.estudo.cadastrolivros.controllers</param-value>
+   <param-value>br.com.estudo.cadastrolivros.resources</param-value>
   </init-param>
   <init-param>
    <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
