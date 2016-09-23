@@ -10,6 +10,10 @@
 var app_main = angular.module('app.main', []);
 
 
-app_main.controller('MainCtrl', function () {
+app_main.controller('MainCtrl', mainFn);
 
-});
+mainFn.$inject = ['ebookService', 'searchBookService', '$rootScope'];
+function mainFn (ebookService, searchBookService, $rootScope) {
+   var main = this;
+   main.listBooks = ebookService.list();
+};

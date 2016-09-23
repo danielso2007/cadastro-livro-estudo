@@ -11,7 +11,9 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
     bookScope.searchBookService = new searchBookService();
 
     bookScope.save = function(){
+      $rootScope.progressbar.start();
       bookScope.book.$save(function(){
+          $rootScope.progressbar.complete();
           bookScope.book = new ebookService();
           bookScope.listBooks = ebookService.list();
       });
@@ -25,8 +27,10 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
     };
 
     bookScope.edit = function(book){
+          $rootScope.progressbar.start();
           bookScope.book = book;
           bookScope.book.$update(function(){
+            $rootScope.progressbar.complete();
             bookScope.listBooks = ebookService.list();
           })
     };
@@ -37,7 +41,7 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
             $rootScope.listBook = angular.copy(data);
             $location.path("/resultsearch")
           });
-   };
+    };
 });
 
 app_book.factory('ebookService', function($resource) {
@@ -56,7 +60,7 @@ app_book.factory('ebookService', function($resource) {
 });
 
 app_book.factory('searchBookService', function ($resource) {
-        return $resource('../rest/book/search/:description',{ description:'@description'},{
+        return $resource('../rest/book/search/:description',null,{
             searchBook:{
               method:'GET',
               isArray:true
