@@ -90,8 +90,8 @@
           <th>ISBN</th>
           <th>Autor(es)</th>
           <th>Status</th>
-          <th width="20px">Excluir</th>
-          <th width="20px">Editar</th>
+          <th width="30px">Editar</th>
+          <th width="30px">Excluir</th>
           </thead>
           <tbody>
           <tr ng-repeat="item in bookScope.listBooks | orderBy: 'title'">
@@ -102,14 +102,14 @@
             <td>{{item.author}}</td>
             <td>{{item.status}}</td>
             <td>
-              <a href ng-click="bookScope.edit(book)" title="editar">
+              <a href ng-click="bookScope.edit(item)" title="editar">
                 <div class="btn">
-                  <span class="glyphicon glyphicon-edit"></span
+                  <span class="glyphicon glyphicon-edit"></span>
                 </div>
               </a>
             </td>
             <td>
-              <a href ng-click="bookScope.remove(book)" title="remover">
+              <a href ng-click="bookScope.remove(item)" title="remover">
                 <div class="btn">
                   <span class="glyphicon glyphicon-remove"></span>
                 </div>

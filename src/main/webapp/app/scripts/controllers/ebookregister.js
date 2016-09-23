@@ -11,37 +11,37 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
     bookScope.searchBookService = new searchBookService();
 
     bookScope.save = function(){
-    console.log(bookScope.book);
-        bookScope.book.$save(function(){
+      bookScope.book.$save(function(){
           bookScope.book = new ebookService();
           bookScope.listBooks = ebookService.list();
       });
     }
 
     bookScope.remove = function(bookToRemove){
-            bookScope.bookRemove = bookToRemove;
-            bookScope.bookRemove.$remove({id:bookScope.bookRemove.id},function(res){
-            bookScope.listBooks = ebookService.list();
-        })
-    }
+        bookToRemove.$remove({id:bookToRemove.id},
+          function(res){
+              bookScope.listBooks = ebookService.list();
+          });
+    };
 
     bookScope.edit = function(book){
           bookScope.book = book;
           bookScope.book.$update(function(){
-          bookScope.listBooks = ebookService.list();
-        })
-    }
+            bookScope.listBooks = ebookService.list();
+          })
+    };
+
     bookScope.search = function(value){
-        searchBookService.searchBook({description:value},
-       function(data){
-          $rootScope.listBook = angular.copy(data);
-          $location.path("/resultsearch")
-        });
-   }
+       searchBookService.searchBook({description:value},
+         function(data){
+            $rootScope.listBook = angular.copy(data);
+            $location.path("/resultsearch")
+          });
+   };
 });
 
 app_book.factory('ebookService', function($resource) {
-      return $resource('../rest/book', {}, {
+      return $resource('../rest/book/:id', {}, {
           list: {
             method:'GET',
             isArray:true
@@ -51,9 +51,6 @@ app_book.factory('ebookService', function($resource) {
           },
           update:{
               method:'PUT'
-          },
-          remove:{
-            method:'DELETE'
           }
       });
 });
