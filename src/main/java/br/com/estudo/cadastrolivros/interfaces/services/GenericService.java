@@ -1,13 +1,13 @@
 package br.com.estudo.cadastrolivros.interfaces.services;
 
+import br.com.estudo.cadastrolivros.model.domain.BaseEntity;
+import br.com.estudo.cadastrolivros.model.repositories.QueryDslCustomerRepository;
+import com.querydsl.core.types.Predicate;
+
 import java.io.Serializable;
 import java.util.List;
 
-import br.com.estudo.cadastrolivros.model.domain.BaseEntity;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.transaction.annotation.Transactional;
-
-public interface GenericService<E extends BaseEntity, ID extends Serializable, R extends CrudRepository> {
+public interface GenericService<E extends BaseEntity, ID extends Serializable, R extends QueryDslCustomerRepository> {
 
     Class<E> getObjectClass();
 
@@ -20,6 +20,8 @@ public interface GenericService<E extends BaseEntity, ID extends Serializable, R
     void delete(E entity);
 
     List<E> listAll();
+
+    List<E> search(Predicate predicate);
 
     R getRepository();
 }

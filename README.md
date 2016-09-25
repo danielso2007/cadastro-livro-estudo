@@ -1,6 +1,6 @@
 # Cadastro de Livros
 
-`versão: 1.0.0`
+`versão: 2.0.0`
 
 # Yeoman
 
@@ -33,3 +33,11 @@ http://docs.spring.io/spring-data/commons/docs/current/reference/html/
 http://docs.spring.io/spring-data/data-commons/docs/1.12.3.RELEASE/reference/html/
 
 http://projects.spring.io/spring-data/
+
+# Spring com QueryDsl
+
+http://www.querydsl.com/static/querydsl/4.1.3/reference/html_single/
+
+https://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
+
+http://www.querydsl.com/

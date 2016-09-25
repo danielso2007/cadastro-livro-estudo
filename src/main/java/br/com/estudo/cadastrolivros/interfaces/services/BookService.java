@@ -7,6 +7,6 @@ import br.com.estudo.cadastrolivros.model.repositories.BookRepository;
 
 public interface BookService extends GenericService<Book, Long, BookRepository> {
 
-    List<Book> search(String description);
+    List<Book> searchByTitleOrAuthor(String description);
 
 }
