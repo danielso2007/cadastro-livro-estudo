@@ -11,24 +11,27 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <spring.version>4.3.2.RELEASE</spring.version>
         <javax.ws.rs-api.version>2.0.1</javax.ws.rs-api.version>
         <log4j.version>1.2.17</log4j.version>
         <jetty.version>6.1.26</jetty.version>
-        <junit.version>4.12</junit.version>
         <hibernate-core.version>5.2.2.Final</hibernate-core.version>
-        <dbunit.version>2.5.3</dbunit.version>
         <jersey.version>1.19.2</jersey.version>
         <jsr311-api.version>1.1.1</jsr311-api.version>
+        <!-- DATABASE -->
         <hsqldb.version>2.3.4</hsqldb.version>
         <slf4j-api.version>1.7.20</slf4j-api.version>
-        <querydsl.version>3.7.4</querydsl.version>
+        <querydsl-apt.version>4.1.4</querydsl-apt.version>
+        <guava.version>19.0</guava.version>
+        <!-- SPRING -->
+        <spring.version>4.3.2.RELEASE</spring.version>
         <spring-boot-starter-data-jpa.version>1.4.1.RELEASE</spring-boot-starter-data-jpa.version>
         <spring-data-jpa.version>1.10.3.RELEASE</spring-data-jpa.version>
-        <guava.version>19.0</guava.version>
+        <!-- TEST -->
+        <junit.version>4.12</junit.version>
+        <dbunit.version>2.5.3</dbunit.version>
         <spring-test-dbunit.version>1.3.0</spring-test-dbunit.version>
         <!-- PLUGIN -->
-        <maven-apt-plugin.version>1.1.3</maven-apt-plugin.version>
+        <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
@@ -109,37 +112,20 @@
         </dependency>
 
         <!-- QUERYDSL -->
-        <!--<dependency>-->
-            <!--<groupId>com.mysema.querydsl</groupId>-->
-            <!--<artifactId>querydsl-apt</artifactId>-->
-            <!--<version>${querydsl.version}</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.mysema.querydsl</groupId>-->
-            <!--<artifactId>querydsl-jpa</artifactId>-->
-            <!--<version>${querydsl.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.querydsl</groupId>-->
-            <!--<artifactId>querydsl-sql-spring</artifactId>-->
-            <!--<version>${querydsl.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
-            <version>4.1.4</version>
+            <version>${querydsl-apt.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
-            <version>4.1.4</version>
+            <version>${querydsl-apt.version}</version>
         </dependency>
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-sql-spring</artifactId>
-            <version>4.1.4</version>
+            <version>${querydsl-apt.version}</version>
         </dependency>
 
 
@@ -227,7 +213,7 @@
             <version>${jsr311-api.version}</version>
         </dependency>
 
-        <!-- BANCO -->
+        <!-- DATABASE -->
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
@@ -329,7 +315,7 @@
             <plugin>
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>apt-maven-plugin</artifactId>
-                <version>1.1.3</version>
+                <version>${apt-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
