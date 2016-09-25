@@ -56,8 +56,7 @@ public class BookResource {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public List<Book> search(@PathParam("description") String description) {
-
-        return bookService.search(description);
+        return bookService.searchByTitleOrAuthor(description);
     }
 
 }

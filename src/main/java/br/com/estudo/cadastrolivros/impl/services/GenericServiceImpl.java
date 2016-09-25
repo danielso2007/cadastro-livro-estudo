@@ -2,10 +2,11 @@ package br.com.estudo.cadastrolivros.impl.services;
 
 import br.com.estudo.cadastrolivros.interfaces.services.GenericService;
 import br.com.estudo.cadastrolivros.model.domain.BaseEntity;
+import br.com.estudo.cadastrolivros.model.repositories.QueryDslCustomerRepository;
 import com.google.common.collect.Lists;
+import com.querydsl.core.types.Predicate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Service
 @Transactional(rollbackFor = {Exception.class})
-public class GenericServiceImpl<E extends BaseEntity, ID extends Serializable, R extends CrudRepository> implements GenericService<E, ID, R> {
+public class GenericServiceImpl<E extends BaseEntity, ID extends Serializable, R extends QueryDslCustomerRepository> implements GenericService<E, ID, R> {
 
     @Autowired(required = false)
     private Logger logger;
@@ -66,6 +67,12 @@ public class GenericServiceImpl<E extends BaseEntity, ID extends Serializable, R
     @Transactional(readOnly = true)
     public List<E> listAll() {
         return Lists.newArrayList(this.repository.findAll());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<E> search(Predicate predicate) {
+        return Lists.newArrayList(this.repository.findAll(predicate));
     }
 
     @Override

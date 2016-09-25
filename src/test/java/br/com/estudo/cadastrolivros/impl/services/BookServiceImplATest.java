@@ -47,70 +47,70 @@ public class BookServiceImplATest extends TestConfig {
     @Test
     public void testSearchBookByTitle() throws Exception {
         description = "Tdd";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertFalse(listBook.isEmpty());
     }
 
     @Test
     public void testSearchBookByAuthorName() throws Exception {
         description = "Daniel";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertFalse(listBook.isEmpty());
     }
 
     @Test
     public void testSearchBookByAuthorLastName() throws Exception {
         description = "Oliveira";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertFalse(listBook.isEmpty());
     }
 
     @Test
     public void testSearchBookByTitleCaseSensitiveIgnored() throws Exception {
         description = "tdd";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertFalse(listBook.isEmpty());
     }
 
     @Test
     public void testSearchBookByAuthorNameCaseSensitiveIgnored() throws Exception {
         description = "Daniel";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertFalse(listBook.isEmpty());
     }
 
     @Test
     public void searchBookByAuthorNameNotFoundBookNotExists() throws Exception {
         description = "paulo coelho";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertTrue(listBook.isEmpty());
     }
 
     @Test
     public void testSearchBookByAuthorNameAndLastName() throws Exception {
         description = "Daniel Oliveira";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertFalse(listBook.isEmpty());
     }
 
     @Test
     public void testSearchBookInDraftStatusCannotBeFound() throws Exception {
         description = "Angular";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertTrue(listBook.isEmpty());
     }
 
     @Test
     public void testSearchBookByTitleNotExistBookWasNotFound() throws Exception {
         description = "NodeJS";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertTrue(listBook.isEmpty());
     }
 
     @Test
     public void testMoreOneBookFoundByTheSameTitleWord() throws Exception {
         description = "Ruby";
-        listBook = bookService.search(description);
+        listBook = bookService.searchByTitleOrAuthor(description);
         assertFalse(listBook.isEmpty());
         int totalExpectedBook = 2;
         assertEquals(totalExpectedBook, listBook.size());
