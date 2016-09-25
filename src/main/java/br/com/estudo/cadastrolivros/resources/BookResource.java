@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.estudo.cadastrolivros.interfaces.services.BookService;
-import br.com.estudo.cadastrolivros.modal.domain.Book;
+import br.com.estudo.cadastrolivros.model.domain.Book;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

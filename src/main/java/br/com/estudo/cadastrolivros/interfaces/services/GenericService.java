@@ -1,18 +1,25 @@
 package br.com.estudo.cadastrolivros.interfaces.services;
 
+import java.io.Serializable;
 import java.util.List;
 
+import br.com.estudo.cadastrolivros.model.domain.BaseEntity;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface GenericService<T> {
+public interface GenericService<E extends BaseEntity, ID extends Serializable, R extends CrudRepository> {
 
-    T getById(Long id);
+    Class<E> getObjectClass();
 
-    void save(T entity);
+    E getById(ID id);
 
-    void update(T entity);
+    E save(E entity);
 
-    void delete(T entity);
+    E update(E entity);
 
-    List<T> listAll();
+    void delete(E entity);
+
+    List<E> listAll();
+
+    R getRepository();
 }

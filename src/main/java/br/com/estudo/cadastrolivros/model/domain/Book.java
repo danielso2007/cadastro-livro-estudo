@@ -1,21 +1,18 @@
-package br.com.estudo.cadastrolivros.modal.domain;
+package br.com.estudo.cadastrolivros.model.domain;
 
 import br.com.estudo.cadastrolivros.enums.StatusBookEnum;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "book")
-public class Book implements java.io.Serializable {
+public class Book extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = -7227105185071353426L;
-
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ID", unique = true, nullable = false)
-    private Long id;
+    private static final long serialVersionUID = -788018586220029981L;
 
     @Column(name = "TITLE", length = 100, unique = true)
     private String title;
@@ -44,15 +41,6 @@ public class Book implements java.io.Serializable {
 
     public Book() {
     }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 
     public String getTitle() {
         return this.title;
@@ -132,7 +120,7 @@ public class Book implements java.io.Serializable {
         result = prime * result + ((author == null) ? 0 : author.hashCode());
         result = prime * result + ((coverUrl == null) ? 0 : coverUrl.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
         result = prime * result + ((status == null) ? 0 : status.hashCode());
         result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -165,10 +153,10 @@ public class Book implements java.io.Serializable {
                 return false;
         } else if (!description.equals(other.description))
             return false;
-        if (id == null) {
-            if (other.id != null)
+        if (getId() == null) {
+            if (other.getId() != null)
                 return false;
-        } else if (!id.equals(other.id))
+        } else if (!getId().equals(other.getId()))
             return false;
         if (isbn == null) {
             if (other.isbn != null)
@@ -201,7 +189,7 @@ public class Book implements java.io.Serializable {
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", author='" + author + '\'' +

@@ -1,58 +1,75 @@
 package br.com.estudo.cadastrolivros.impl.services;
 
-import br.com.estudo.cadastrolivros.interfaces.dao.GenericDAO;
 import br.com.estudo.cadastrolivros.interfaces.services.GenericService;
+import br.com.estudo.cadastrolivros.model.domain.BaseEntity;
+import com.google.common.collect.Lists;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 @Service
-public class GenericServiceImpl<T, DAO extends GenericDAO<T>> implements GenericService<T> {
-	
-	private DAO dao;
+@Transactional(rollbackFor = {Exception.class})
+public class GenericServiceImpl<E extends BaseEntity, ID extends Serializable, R extends CrudRepository> implements GenericService<E, ID, R> {
 
-    public GenericServiceImpl(DAO dao) {
-        this.dao = dao;
+    @Autowired(required = false)
+    private Logger logger;
+
+    private R repository;
+
+    private Class<E> persistentClass;
+
+    public GenericServiceImpl(R repository) {
+        this.repository = repository;
+        if (getClass().getGenericSuperclass() instanceof ParameterizedType) {
+            this.persistentClass = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        } else {
+            persistentClass = (Class<E>) getClass().getGenericSuperclass();
+        }
     }
 
-    public DAO getDao() {
-        return dao;
+    @Override
+    public Class<E> getObjectClass() {
+        return this.persistentClass;
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-    public T getById(Long id) {
-        return dao.getById(id);
+    @Transactional(readOnly = true)
+    public E getById(ID id) {
+        return (E) this.repository.findOne(id);
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void save(T entity) {
-		dao.saveOrUpdate(entity);
-		
-	}
+    @Transactional
+    public E save(E entity) {
+        return (E) this.repository.save(entity);
+    }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public void update(T entity) {
-		dao.saveOrUpdate(entity);
-		
-	}
+    @Transactional
+    public E update(E entity) {
+        return (E) this.repository.save(entity);
+    }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public void delete(T entity) {
-		dao.delete(entity);
-		
-	}
+    @Transactional
+    public void delete(E entity) {
+        this.repository.delete(entity);
+    }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> listAll() {
-		List<T> list = dao.list();
-		return list;
-	}
-	
+    @Transactional(readOnly = true)
+    public List<E> listAll() {
+        return Lists.newArrayList(this.repository.findAll());
+    }
+
+    @Override
+    public R getRepository() {
+        return this.repository;
+    }
 }

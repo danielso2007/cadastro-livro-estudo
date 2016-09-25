@@ -2,7 +2,7 @@ package br.com.estudo.cadastrolivros.impl.services;
 
 import br.com.estudo.cadastrolivros.enums.StatusBookEnum;
 import br.com.estudo.cadastrolivros.interfaces.services.BookService;
-import br.com.estudo.cadastrolivros.modal.domain.Book;
+import br.com.estudo.cadastrolivros.model.domain.Book;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,3 +1,7 @@
+# Cadastro de Livros
+
+`versão: 1.0.0`
+
 # Yeoman
 
 yo angular
@@ -21,3 +25,11 @@ https://startbootstrap.com/template-overviews/sb-admin-2/
 `mvn jetty:run`
 
 Acesse o link: http://localhost:8080/app/index.html#/
+
+# Spring Repository
+
+http://docs.spring.io/spring-data/commons/docs/current/reference/html/
+
+http://docs.spring.io/spring-data/data-commons/docs/1.12.3.RELEASE/reference/html/
+
+http://projects.spring.io/spring-data/
