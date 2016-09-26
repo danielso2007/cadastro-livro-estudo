@@ -7,12 +7,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-    <context:component-scan base-package="br.com.estudo.cadastrolivros"/>
+    <bean class="org.dozer.spring.DozerBeanMapperFactoryBean">
+        <property name="mappingFiles" value="classpath*:maps/*-map.xml"/>
+    </bean>
 
-    <context:property-placeholder location="classpath:spring/config/*.properties"/>
-
-    <bean id="propertyPlaceHolderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
-
-    <import resource="applicationContext-dozer.xml"/>
-    <import resource="applicationContext-persistence.xml"/>
 </beans>

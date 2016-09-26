@@ -14,26 +14,26 @@ public class Book extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -788018586220029981L;
 
-    @Column(name = "TITLE", length = 100, unique = true)
+    @Column(name = "TITLE", length = 100, unique = true, nullable = false)
     private String title;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
-    @Column(name = "AUTHOR", length = 100)
+    @Column(name = "AUTHOR", length = 100, nullable = false)
     private String author;
 
-    @Column(name = "TOTAL_PAGE")
+    @Column(name = "TOTAL_PAGE", nullable = false)
     private Long totalPage;
 
-    @Column(name = "ISBN", length = 45)
+    @Column(name = "ISBN", length = 45, nullable = false)
     private String isbn;
 
-    @Column(name = "STATUS", length = 45)
+    @Column(name = "STATUS", length = 45, nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusBookEnum status;
 
-    @Column(name = "YEAR_PUBLISHED", length = 45)
+    @Column(name = "YEAR_PUBLISHED", length = 45, nullable = false)
     private String yearPublished;
 
     @Column(name = "COVER_URL")

@@ -4,9 +4,10 @@ import java.util.List;
 
 import br.com.estudo.cadastrolivros.model.domain.Book;
 import br.com.estudo.cadastrolivros.model.repositories.BookRepository;
+import br.com.estudo.cadastrolivros.transferobject.BookTransferObject;
 
-public interface BookService extends GenericService<Book, Long, BookRepository> {
+public interface BookService extends GenericService<BookTransferObject, Book, Long, BookRepository> {
 
-    List<Book> searchByTitleOrAuthor(String description);
+    List<BookTransferObject> searchByTitleOrAuthor(String description);
 
 }

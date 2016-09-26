@@ -7,21 +7,22 @@ import com.querydsl.core.types.Predicate;
 import java.io.Serializable;
 import java.util.List;
 
-public interface GenericService<E extends BaseEntity, ID extends Serializable, R extends QueryDslCustomerRepository> {
+public interface GenericService<T, E extends BaseEntity, ID extends Serializable, R extends QueryDslCustomerRepository> {
 
-    Class<E> getObjectClass();
+    Class<E> getEntityClass();
+    Class<T> getTansferObjectClass();
 
-    E getById(ID id);
+    T getById(ID id);
 
-    E save(E entity);
+    T save(T entity);
 
-    E update(E entity);
+    T update(T entity);
 
-    void delete(E entity);
+    void delete(T entity);
 
-    List<E> listAll();
+    List<T> listAll();
 
-    List<E> search(Predicate predicate);
+    List<T> search(Predicate predicate);
 
     R getRepository();
 }

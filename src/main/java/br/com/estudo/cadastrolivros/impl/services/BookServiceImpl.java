@@ -5,6 +5,7 @@ import br.com.estudo.cadastrolivros.interfaces.services.BookService;
 import br.com.estudo.cadastrolivros.model.domain.Book;
 import br.com.estudo.cadastrolivros.model.domain.QBook;
 import br.com.estudo.cadastrolivros.model.repositories.BookRepository;
+import br.com.estudo.cadastrolivros.transferobject.BookTransferObject;
 import br.com.estudo.cadastrolivros.utils.Constants;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class BookServiceImpl extends GenericServiceImpl<Book, Long, BookRepository> implements BookService {
+public class BookServiceImpl extends GenericServiceImpl<BookTransferObject, Book, Long, BookRepository> implements BookService {
 
     private QBook qBook = QBook.book;
     private BookRepository bookRepository;
@@ -26,7 +27,7 @@ public class BookServiceImpl extends GenericServiceImpl<Book, Long, BookReposito
 
     @Override
     @Transactional(readOnly = true)
-    public List<Book> searchByTitleOrAuthor(String description) {
+    public List<BookTransferObject> searchByTitleOrAuthor(String description) {
         BooleanBuilder predicate = new BooleanBuilder();
         predicate.and(qBook.status.eq(StatusBookEnum.PUBLISHED));
         predicate

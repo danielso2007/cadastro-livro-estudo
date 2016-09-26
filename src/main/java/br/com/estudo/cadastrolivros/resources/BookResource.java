@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import br.com.estudo.cadastrolivros.transferobject.BookTransferObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.estudo.cadastrolivros.interfaces.services.BookService;
@@ -27,19 +28,19 @@ public class BookResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void save(Book book) {
+    public void save(BookTransferObject book) {
         bookService.save(book);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Book> getListBooks() {
+    public List<BookTransferObject> getListBooks() {
         return bookService.listAll();
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void update(Book book) {
+    public void update(BookTransferObject book) {
         bookService.update(book);
     }
 
@@ -47,7 +48,7 @@ public class BookResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public void delete(@PathParam("id") Long id) {
-        Book book = bookService.getById(id);
+        BookTransferObject book = bookService.getById(id);
         bookService.delete(book);
 
     }
@@ -55,7 +56,7 @@ public class BookResource {
     @Path("/search/{description}")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public List<Book> search(@PathParam("description") String description) {
+    public List<BookTransferObject> search(@PathParam("description") String description) {
         return bookService.searchByTitleOrAuthor(description);
     }
 
