@@ -1,6 +1,6 @@
 # Cadastro de Livros
 
-`versão: 2.0.0`
+`versão: 2.1.0`
 
 # Yeoman
 
