@@ -46,6 +46,9 @@ http://www.querydsl.com/
 
 http://dozer.sourceforge.net/documentation/gettingstarted.html
 
+> Os dados vindos do front-end são transformado em TransferObject para depois, ao persistir, transformado em entity.
+> Isso é para manter livre o object que representa a tela, do object o que representa entidade. O Object transferObject por ter qualquer atributo que a entidade não tenha, sem prejudicar a persistência.
+
 #### Integração com Spring
 
 http://dozer.sourceforge.net/documentation/springintegration.html
@@ -58,7 +61,7 @@ https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch03.html
 
 https://flywaydb.org/
 
-Não foi implementado totalmente porque não uso um banco de dados físico. Estou usando o hsqldb em memória.
+> Não foi implementado totalmente porque não uso um banco de dados físico. Estou usando o hsqldb em memória.
 
 # Teste com dbUnit
 
