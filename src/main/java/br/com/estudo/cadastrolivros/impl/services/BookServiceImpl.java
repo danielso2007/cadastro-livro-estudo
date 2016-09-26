@@ -18,7 +18,6 @@ import java.util.List;
 public class BookServiceImpl extends GenericServiceImpl<BookTransferObject, Book, Long, BookRepository> implements BookService {
 
     private QBook qBook = QBook.book;
-    private BookRepository bookRepository;
 
     @Autowired
     public BookServiceImpl(BookRepository repository) {
