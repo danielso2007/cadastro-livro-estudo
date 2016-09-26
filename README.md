@@ -41,3 +41,26 @@ http://www.querydsl.com/static/querydsl/4.1.3/reference/html_single/
 https://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
 
 http://www.querydsl.com/
+
+# Dozer
+
+http://dozer.sourceforge.net/documentation/gettingstarted.html
+
+#### Integração com Spring
+
+http://dozer.sourceforge.net/documentation/springintegration.html
+
+# Algumas configurações do Hibernate 5
+
+https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch03.html
+
+# Migração de Banco de dados com Flyway
+
+https://flywaydb.org/
+
+Não foi implementado totalmente porque não uso um banco de dados físico. Estou usando o hsqldb em memória.
+
+# Teste com dbUnit
+
+http://dbunit.sourceforge.net/
+

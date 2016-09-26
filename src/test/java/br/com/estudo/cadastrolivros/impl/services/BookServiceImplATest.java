@@ -3,6 +3,7 @@ package br.com.estudo.cadastrolivros.impl.services;
 import br.com.estudo.cadastrolivros.enums.StatusBookEnum;
 import br.com.estudo.cadastrolivros.interfaces.services.BookService;
 import br.com.estudo.cadastrolivros.model.domain.Book;
+import br.com.estudo.cadastrolivros.transferobject.BookTransferObject;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,12 @@ public class BookServiceImplATest extends TestConfig {
     @Autowired
     private BookService bookService;
 
-    private List<Book> listBook;
+    private List<BookTransferObject> listBook;
     private String description;
 
     @Test
     public void testSaveBookWithSuccessAnyExceptionThrow() throws Exception {
-        Book bookAngularJS = getInstanceBook();
+        BookTransferObject bookAngularJS = getInstanceBook();
         try {
             System.out.println(bookAngularJS);
             bookService.save(bookAngularJS);
@@ -40,7 +41,7 @@ public class BookServiceImplATest extends TestConfig {
     @Test
     public void testGetBookById() throws Exception {
         Long id = 1L;
-        Book book = bookService.getById(id);
+        BookTransferObject book = bookService.getById(id);
         assertNotNull(book);
     }
 
@@ -117,8 +118,8 @@ public class BookServiceImplATest extends TestConfig {
     }
 
 
-    private Book getInstanceBook() throws Exception {
-        Book bookAngularJS = new Book();
+    private BookTransferObject getInstanceBook() throws Exception {
+        BookTransferObject bookAngularJS = new BookTransferObject();
         bookAngularJS.setTitle("AngularJS na Prática");
         bookAngularJS.setAuthor("Daniel");
         bookAngularJS.setCoverUrl("http://www.bookshandson.com.br/bookcover.png");
