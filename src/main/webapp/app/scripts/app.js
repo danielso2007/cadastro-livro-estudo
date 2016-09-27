@@ -69,8 +69,11 @@ function appConfigFn ($routeProvider, $ariaProvider, $httpProvider) {
         controller: 'EbookregisterCtrl',
         controllerAs: 'bookScope'
       })
+      .when('/404', {
+          templateUrl: '404.html'
+        })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/404'
       });
 };
 

@@ -2,6 +2,25 @@
 
 `versão: 2.1.1`
 
+# Preparando o projeto web
+
+Na pasta `/src/main/webapp/designer`, digite:
+1. `npm install`
+2. `bower install`
+3. `gulp`
+
+# Rodando a aplicação
+
+`mvn jetty:run`
+
+Acesse o link: http://localhost:8080/app/index.html#/
+
+# Teste
+
+### Para rodar o teste, execute:
+`mvn test -P test`
+> O profile default não executa teste automaticamente. Isso foi feito para agilizar o build do projeto. `mvn test` sozinho irá skipped devido a configuração no surefire.
+
 # Yeoman
 
 yo angular
@@ -17,18 +36,6 @@ https://startbootstrap.com/template-overviews/sb-admin-2/
 # Bootstrap
 
 http://www.w3schools.com/bootstrap/bootstrap_ref_css_helpers.asp
-
-# Rodando a aplicação
-
-`mvn jetty:run`
-
-Acesse o link: http://localhost:8080/app/index.html#/
-
-# Teste
-
-### Para rodar o teste, execute:
-`mvn test -P test`
-> O profile default não executa teste automaticamente. Isso foi feito para agilizar o build do projeto. `mvn test` sozinho irá skipped devido a configuração no surefire.
 
 # Spring Repository
 

@@ -24,7 +24,7 @@
         <querydsl-apt.version>4.1.4</querydsl-apt.version>
         <guava.version>19.0</guava.version>
         <!-- SPRING -->
-        <spring.version>4.3.2.RELEASE</spring.version>
+        <spring.version>4.3.3.RELEASE</spring.version>
         <spring-boot-starter-data-jpa.version>1.4.1.RELEASE</spring-boot-starter-data-jpa.version>
         <spring-data-jpa.version>1.10.3.RELEASE</spring-data-jpa.version>
         <!-- TEST -->
@@ -79,6 +79,12 @@
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
