@@ -119,11 +119,9 @@
               </a>
             </td>
             <td>
-              <a href ng-click="bookScope.remove(item)" title="remover">
-                <div class="btn">
-                  <span class="glyphicon glyphicon-remove"></span>
-                </div>
-              </a>
+              <button type="button" class="btn btn-link" ng-click="bookScope.removeOpenDialog(item)" data-toggle="modal">
+                <span class="glyphicon glyphicon-remove color-red"></span>
+              </button>
             </td>
           </tr>
           </tbody>
@@ -140,3 +138,22 @@
 
 </div>
 <!-- /.row -->
+
+<!-- Modal -->
+<div class="modal fade" id="removeDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header btn-danger">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Excluir</h4>
+      </div>
+      <div class="modal-body">
+        Deseja excluir o livro: "{{bookScope.objectRemove.title}}"?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+        <button type="button" class="btn btn-danger" ng-click="bookScope.remove()">Sim</button>
+      </div>
+    </div>
+  </div>
+</div>

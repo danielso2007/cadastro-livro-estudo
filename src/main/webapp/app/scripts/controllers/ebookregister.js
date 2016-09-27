@@ -19,11 +19,28 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
       });
     }
 
-    bookScope.remove = function(bookToRemove){
-        bookToRemove.$remove({id:bookToRemove.id},
-          function(res){
-              bookScope.listBooks = ebookService.list();
-          });
+    bookScope.removeOpenDialog = function(bookToRemove, index){
+        bookScope.objectRemove = bookToRemove;
+        bookScope.indexRemove = index;
+        $('#removeDialog').modal('show');
+    };
+
+    bookScope.remove = function(){
+        $rootScope.progressbar.start();
+
+        var promise =  ebookService.remove({id: bookScope.objectRemove.id}).$promise;
+
+        promise.then(function(data) {
+            bookScope.listBooks.splice(bookScope.indexRemove, 1);
+            delete bookScope.objectRemove;
+            delete bookScope.indexRemove;
+            $('#removeDialog').modal('hide');
+            $rootScope.progressbar.complete();
+        }).catch(function(response) {
+            $('#removeDialog').modal('hide');
+            $rootScope.progressbar.complete();
+            console.error(response);
+        });
     };
 
     bookScope.edit = function(book){

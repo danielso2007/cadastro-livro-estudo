@@ -1,6 +1,6 @@
 # Cadastro de Livros
 
-`versão: 2.1.0`
+`versão: 2.1.1`
 
 # Yeoman
 
@@ -14,17 +14,21 @@ https://github.com/yeoman/generator-angular
 
 https://startbootstrap.com/template-overviews/sb-admin-2/
 
-# Teste
+# Bootstrap
 
-### Para rodar o teste, execute:
-`mvn test -P test`
-> O profile default não executa teste automaticamente. Isso foi feito para agilizar o build do projeto. `mvn test` sozinho irá skipped devido a configuração no surefire.
+http://www.w3schools.com/bootstrap/bootstrap_ref_css_helpers.asp
 
 # Rodando a aplicação
 
 `mvn jetty:run`
 
 Acesse o link: http://localhost:8080/app/index.html#/
+
+# Teste
+
+### Para rodar o teste, execute:
+`mvn test -P test`
+> O profile default não executa teste automaticamente. Isso foi feito para agilizar o build do projeto. `mvn test` sozinho irá skipped devido a configuração no surefire.
 
 # Spring Repository
 

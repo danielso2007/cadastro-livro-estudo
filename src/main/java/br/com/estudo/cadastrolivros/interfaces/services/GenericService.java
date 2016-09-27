@@ -20,9 +20,12 @@ public interface GenericService<T, E extends BaseEntity, ID extends Serializable
 
     void delete(T entity);
 
+    void delete(Long id);
+
     List<T> listAll();
 
     List<T> search(Predicate predicate);
 
     R getRepository();
+
 }
