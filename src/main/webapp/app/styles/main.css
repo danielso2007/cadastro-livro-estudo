@@ -67,6 +67,20 @@ body {
   margin-top: 28px;
 }
 
+/* cores */
+.color-red {
+    color: red;
+}
+
+.color-green {
+    color: green;
+}
+
+.color-blue {
+    color: blue;
+}
+
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
