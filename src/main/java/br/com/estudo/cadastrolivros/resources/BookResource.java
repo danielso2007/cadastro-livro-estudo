@@ -48,9 +48,7 @@ public class BookResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public void delete(@PathParam("id") Long id) {
-        BookTransferObject book = bookService.getById(id);
-        bookService.delete(book);
-
+        bookService.delete(id);
     }
 
     @Path("/search/{description}")

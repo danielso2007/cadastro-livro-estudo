@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -74,7 +73,12 @@ public class GenericServiceImpl<T, E extends BaseEntity, ID extends Serializable
     @Override
     @Transactional
     public void delete(T to) {
-        this.repository.delete(mapper.map(to, entityClass));
+        this.repository.delete(this.repository.findOne(mapper.map(to, entityClass)));
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.repository.delete(this.repository.findOne(id));
     }
 
     @Override
