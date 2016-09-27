@@ -1,6 +1,6 @@
 # Cadastro de Livros
 
-`versão: 2.1.1`
+`versão: 2.3.1`
 
 # Preparando o projeto web
 
