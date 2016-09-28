@@ -10,19 +10,6 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <servlet>
-        <servlet-name>jersey-servlet</servlet-name>
-        <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
-        <init-param>
-            <param-name>com.sun.jersey.spi.spring.container.servlet.SpringServlet</param-name>
-            <!-- package controller update of your -->
-            <param-value>br.com.estudo.cadastrolivros.resources</param-value>
-        </init-param>
-        <init-param>
-            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </servlet>
     <!-- SPRING MVC -->
     <servlet>
         <servlet-name>spring_mvc</servlet-name>
@@ -36,10 +23,5 @@
     <servlet-mapping>
         <servlet-name>spring_mvc</servlet-name>
         <url-pattern>/*</url-pattern>
-    </servlet-mapping>
-    <!-- path restful -->
-    <servlet-mapping>
-        <servlet-name>jersey-servlet</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 </web-app>

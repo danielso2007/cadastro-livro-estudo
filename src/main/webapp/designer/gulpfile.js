@@ -8,6 +8,8 @@ var wiredep = require('wiredep').stream;
 var runSequence = require('run-sequence');
 var inject = require('gulp-inject');
 var debug = require('gulp-debug');
+var install = require("gulp-install");
+var clean = require('gulp-clean');
 
 var yeoman = {
     app: require('./bower.json').appPath || '../app',
@@ -43,8 +45,38 @@ var lintScripts = lazypipe()
     .pipe($.jshint, '.jshintrc')
     .pipe($.jshint.reporter, 'jshint-stylish');
 
+
+gulp.task('clean:images', function () {
+    return gulp.src(yeoman.app + '/public/images').pipe(clean({force: true}));
+});
+
+gulp.task('clean:lib', function () {
+    return gulp.src(yeoman.app + '/public/lib').pipe(clean({force: true}));
+});
+
+gulp.task('clean:styles', function () {
+    return gulp.src(yeoman.app + '/public/styles').pipe(clean({force: true}));
+});
+
+gulp.task('clean:vendor', function () {
+    return gulp.src(yeoman.app + '/public/vendor').pipe(clean({force: true}));
+});
+
+gulp.task('clean:all', function () {
+    runSequence('clean:images', 'clean:lib', 'clean:styles', 'clean:vendor');
+});
+
+
 gulp.task('lint:scripts', function() {
     return gulp.src(paths.scripts).pipe(lintScripts());
+});
+
+gulp.task('install:bower', function() {
+    return gulp.src(['./bower.json']).pipe(install());
+});
+
+gulp.task('install:npm', function() {
+    return gulp.src(['./package.json']).pipe(install());
 });
 
 // inject bower components
@@ -157,6 +189,6 @@ gulp.copy = function(src, dest, base) {
         .pipe(gulp.dest(dest)).pipe(debug());
 };
 
-gulp.task('default', ['bower'], function() {
-    runSequence(['inject', 'images']);
+gulp.task('default', function() {
+    runSequence('clean:all', 'install:bower', 'copy:libs', 'copy:vendor', 'copy:styles', 'images', 'inject:scripts', 'inject', 'bower');
 });

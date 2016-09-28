@@ -14,35 +14,40 @@
       <!--</div>-->
       <div class="panel-body">
         <div class="row">
-          <form role="form">
+          <form name="basicForm" role="form" novalidate>
             <div class="col-lg-4">
-              <div class="form-group">
+              <div class="form-group" ng-class="{ 'has-error': basicForm.book_title.$invalid && basicForm.book_title.$touched }">
                 <label>Titulo</label>
-                <input class="form-control" ng-model="bookScope.book.title" placeholder="Informe o titulo do livro">
+                <input class="form-control" id="book_title" name="book_title" ng-model="bookScope.book.title" placeholder="Informe o titulo do livro" required ng-required="true">
+                <!--<div ng-messages="basicForm.book_title.$error" ng-show="basicForm.book_title.$touched" style="position: fixed;color: red">-->
+                  <!--<div ng-message="required">-->
+                    <!--<span>Obrigatório</span>-->
+                  <!--</div>-->
+                <!--</div>-->
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="form-group">
+              <div class="form-group" ng-class="{ 'has-error': basicForm.book_autor.$invalid && basicForm.book_autor.$touched }">
                 <label>Autor(es)</label>
-                <input class="form-control" placeholder="Informe nome do Autor(a) ou Autores" ng-model="bookScope.book.author">
+                <input class="form-control" id="book_autor" name="book_autor" placeholder="Informe nome do Autor(a) ou Autores" ng-model="bookScope.book.author" required ng-required="true">
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="form-group">
+              <div class="form-group" ng-class="{ 'has-error': basicForm.book_isbn.$invalid && basicForm.book_isbn.$touched }">
                 <label>ISBN</label>
-                <input class="form-control" placeholder="Informe o ISBN livro" ng-model="bookScope.book.isbn">
+                <input class="form-control" id="book_isbn" name="book_isbn" placeholder="Informe o ISBN livro" ng-model="bookScope.book.isbn" required ng-required="true">
               </div>
             </div>
             <div class="col-lg-2">
-              <div class="form-group">
+              <div class="form-group" ng-class="{ 'has-error': basicForm.book_published.$invalid && basicForm.book_published.$touched }">
                 <label>Ano de publicação</label>
-                <input class="form-control" placeholder="Publicação" ng-model="bookScope.book.yearPublished">
+                <input class="form-control" id="book_published" name="book_published" placeholder="Publicação" ng-model="bookScope.book.yearPublished" required ng-required="true">
               </div>
             </div>
             <div class="col-lg-2">
-              <div class="form-group">
+              <div class="form-group" ng-class="{ 'has-error': basicForm.book_total.$invalid && basicForm.book_total.$touched }">
                 <label>Total de Páginas</label>
-                <input class="form-control" type="number" placeholder="Páginas" ng-model="bookScope.book.totalPage">
+                <input class="form-control" id="book_total" name="book_total" type="number" placeholder="Páginas" ng-model="bookScope.book.totalPage" required ng-required="true">
               </div>
             </div>
             <div class="col-lg-6">
@@ -52,9 +57,9 @@
               </div>
             </div>
             <div class="col-lg-2">
-              <div class="form-group">
+              <div class="form-group" ng-class="{ 'has-error': basicForm.book_status.$invalid && basicForm.book_status.$touched }">
                 <label>Status</label>
-                <select ng-model="bookScope.book.status" class="form-control" name="size" required>
+                <select ng-model="bookScope.book.status" id="book_status" name="book_status" class="form-control" name="size" required ng-required="true">
                   <option value="">Selecione</option>
                   <option value="PUBLISHED" ng-selected="bookScope.book.status==='PUBLISHED'">Ativo</option>
                   <option value="DRAFT" ng-selected="bookScope.book.status==='DRAFT'">Inativo</option>
@@ -62,14 +67,14 @@
               </div>
             </div>
             <div class="col-lg-12">
-              <div class="form-group">
+              <div class="form-group" ng-class="{ 'has-error': basicForm.book_resumo.$invalid && basicForm.book_resumo.$touched }">
                 <label>Descrição Resumida</label>
-                <textarea class="form-control" rows="3" ng-model="bookScope.book.description"></textarea>
+                <textarea class="form-control" id="book_resumo" name="book_resumo" rows="3" ng-model="bookScope.book.description" required ng-required="true"></textarea>
               </div>
             </div>
             <div class="col-lg-12">
-              <button type="submit" class="btn btn-success" ng-click="bookScope.save()">Salvar</button>
-              <button type="reset" class="btn btn-default">Limpar</button>
+              <button type="submit" class="btn btn-success" ng-click="bookScope.save(basicForm)" ng-disabled="basicForm.$invalid">Salvar</button>
+              <button type="reset" class="btn btn-default" ng-click="bookScope.clean(basicForm)">Limpar</button>
             </div>
           </form>
         </div>

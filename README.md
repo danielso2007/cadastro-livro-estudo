@@ -1,13 +1,12 @@
 # Cadastro de Livros
 
-`versão: 2.3.1`
+`versão: 2.3.1` (Spring MVC e Angular-ui-router)
 
 # Preparando o projeto web
 
 Na pasta `/src/main/webapp/designer`, digite:
 1. `npm install`
-2. `bower install`
-3. `gulp`
+2. `gulp`
 
 # Rodando a aplicação
 
@@ -36,6 +35,10 @@ https://startbootstrap.com/template-overviews/sb-admin-2/
 # Bootstrap
 
 http://www.w3schools.com/bootstrap/bootstrap_ref_css_helpers.asp
+
+# Spring MVC
+
+http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html
 
 # Spring Repository
 

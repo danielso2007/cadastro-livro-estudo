@@ -14,7 +14,7 @@ var app = angular.module('app', [
     'ngCookies',
     'ngMessages',
     'ngResource',
-    'ngRoute',
+    'ui.router',
     'ngSanitize',
     'ngTouch',
     'ngProgress',
@@ -22,10 +22,7 @@ var app = angular.module('app', [
     'app.main'
   ]);
 
-app.config(appConfigFn);
-
-appConfigFn.$inject = ['$routeProvider', '$ariaProvider', '$httpProvider'];
-function appConfigFn ($routeProvider, $ariaProvider, $httpProvider) {
+function appConfigFn ($stateProvider, $urlRouterProvider, $ariaProvider, $httpProvider) {
     $ariaProvider.config({tabindex: false});
 
     $httpProvider.interceptors.push(function($q, $rootScope) {
@@ -53,54 +50,53 @@ function appConfigFn ($routeProvider, $ariaProvider, $httpProvider) {
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
     $httpProvider.defaults.withCredentials = true;
 
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
+
+  $urlRouterProvider.otherwise("/404");
+
+  $stateProvider
+      .state('home', {
+        url: "/",
+        templateUrl: "views/main.html",
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/ebookRegister', {
-        templateUrl: 'views/ebookregister.html',
+      .state('ebookRegister', {
+        url: "/ebookRegister",
+        templateUrl: "views/ebookregister.html",
         controller: 'EbookregisterCtrl',
         controllerAs: 'bookScope'
       })
-      .when('/resultsearch', {
-        templateUrl: 'views/resultsearch.html',
+      .state('resultsearch', {
+        url: "/resultsearch",
+        templateUrl: "views/resultsearch.html",
         controller: 'EbookregisterCtrl',
         controllerAs: 'bookScope'
-      })
-      .when('/404', {
-          templateUrl: '404.html'
-        })
-      .otherwise({
-        redirectTo: '/404'
       });
 };
+app.config(appConfigFn);
+appConfigFn.$inject = ['$stateProvider', '$urlRouterProvider', '$ariaProvider', '$httpProvider'];
 
 
-//app.run(appRunFn);
-//
-//appRunFn.$inject = ['$rootScope', '$state', '$stateParams'];
-//function appRunFn($rootScope, $state, $stateParams) {
-//	$rootScope.$state = $state;
-//	$rootScope.$stateParams = $stateParams;
-//
-//	// Cleanup
-//	$rootScope.$on('$destroy', function() {
-//		stateChangeStartEvent();
-//		stateChangeSuccessEvent();
-//	})
-//
-//	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-//		$rootScope.$lastState = {state: fromState, params: fromParams};
-//	});
-//};
+function appRunFn($rootScope, $state, $stateParams) {
+	$rootScope.$state = $state;
+	$rootScope.$stateParams = $stateParams;
+
+	// Cleanup
+	$rootScope.$on('$destroy', function() {
+	console.log('das');
+		stateChangeStartEvent();
+		stateChangeSuccessEvent();
+	})
+
+	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+		$rootScope.$lastState = {state: fromState, params: fromParams};
+	});
+};
+app.run(appRunFn);
+appRunFn.$inject = ['$rootScope', '$state', '$stateParams'];
 
 
-app.controller('AppController', appFn);
-
-appFn.$inject = ['$rootScope', '$scope', '$location', 'ebookService', 'searchBookService', 'ngProgressFactory'];
-function appFn($rootScope, $scope, $location, ebookService, searchBookService, ngProgressFactory) {
+function appFn($rootScope, $scope, $location, ebookService, searchBookService, ngProgressFactory, $state) {
    $rootScope.progressbar = ngProgressFactory.createInstance();
 
    $scope.filtro;
@@ -112,8 +108,10 @@ function appFn($rootScope, $scope, $location, ebookService, searchBookService, n
               function(data){
                  $rootScope.progressbar.complete();
                  $rootScope.listBook = angular.copy(data);
-                 $location.path("/resultsearch")
+                 $state.go("resultsearch");
                });
       }
    };
 };
+app.controller('AppController', appFn);
+appFn.$inject = ['$rootScope', '$scope', '$location', 'ebookService', 'searchBookService', 'ngProgressFactory', '$state'];
