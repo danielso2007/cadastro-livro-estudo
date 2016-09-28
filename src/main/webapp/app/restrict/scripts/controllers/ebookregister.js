@@ -2,7 +2,7 @@
 
 var app_book = angular.module('app.book', []);
 
-app_book.controller('EbookregisterCtrl', function (ebookService, searchBookService, $rootScope, $location) {
+app_book.controller('EbookregisterCtrl', function (ebookService, searchBookService, $rootScope, $location, $state) {
     var bookScope = this;
 
     bookScope.book = new ebookService();
@@ -10,13 +10,30 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
     $rootScope.listBook;
     bookScope.searchBookService = new searchBookService();
 
-    bookScope.save = function(){
-      $rootScope.progressbar.start();
-      bookScope.book.$save(function(){
-          $rootScope.progressbar.complete();
-          bookScope.book = new ebookService();
-          bookScope.listBooks = ebookService.list();
-      });
+    bookScope.clean = function(form) {
+        if (form) {
+          form.$setPristine();
+          form.$setUntouched();
+        }
+        bookScope.book = new ebookService();
+    };
+
+    bookScope.save = function(form){
+      if (form) {
+        form.$setPristine();
+        form.$setUntouched();
+      }
+      if (bookScope.book.id) {
+        bookScope.book.$update(function(){
+           bookScope.book = new ebookService();
+           bookScope.listBooks = ebookService.list();
+        });
+      } else {
+        bookScope.book.$save(function(){
+            bookScope.book = new ebookService();
+            bookScope.listBooks = ebookService.list();
+        });
+      }
     }
 
     bookScope.removeOpenDialog = function(bookToRemove, index){
@@ -26,8 +43,6 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
     };
 
     bookScope.remove = function(){
-        $rootScope.progressbar.start();
-
         var promise =  ebookService.remove({id: bookScope.objectRemove.id}).$promise;
 
         promise.then(function(data) {
@@ -35,7 +50,6 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
             delete bookScope.objectRemove;
             delete bookScope.indexRemove;
             $('#removeDialog').modal('hide');
-            $rootScope.progressbar.complete();
         }).catch(function(response) {
             $('#removeDialog').modal('hide');
             $rootScope.progressbar.complete();
@@ -44,20 +58,7 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
     };
 
     bookScope.edit = function(book){
-          $rootScope.progressbar.start();
-          bookScope.book = book;
-          bookScope.book.$update(function(){
-            $rootScope.progressbar.complete();
-            bookScope.listBooks = ebookService.list();
-          })
-    };
-
-    bookScope.search = function(value){
-       searchBookService.searchBook({description:value},
-         function(data){
-            $rootScope.listBook = angular.copy(data);
-            $location.path("/resultsearch")
-          });
+          bookScope.book = angular.copy(book);
     };
 });
 
@@ -77,10 +78,10 @@ app_book.factory('ebookService', function($resource) {
 });
 
 app_book.factory('searchBookService', function ($resource) {
-        return $resource('../rest/book/search/:description',null,{
-            searchBook:{
-              method:'GET',
-              isArray:true
-            }
-        });
-      });
+    return $resource('../rest/book/search/:description',null,{
+        searchBook:{
+          method:'GET',
+          isArray:true
+        }
+    });
+});

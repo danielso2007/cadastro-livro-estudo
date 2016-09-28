@@ -1,6 +1,24 @@
 # Cadastro de Livros
 
-`versão: 2.1.1`
+`versão: 2.3.1` (Spring MVC e Angular-ui-router)
+
+# Preparando o projeto web
+
+Na pasta `/src/main/webapp/designer`, digite:
+1. `npm install`
+2. `gulp`
+
+# Rodando a aplicação
+
+`mvn jetty:run`
+
+Acesse o link: http://localhost:8080/app/index.html#/
+
+# Teste
+
+### Para rodar o teste, execute:
+`mvn test -P test`
+> O profile default não executa teste automaticamente. Isso foi feito para agilizar o build do projeto. `mvn test` sozinho irá skipped devido a configuração no surefire.
 
 # Yeoman
 
@@ -18,17 +36,9 @@ https://startbootstrap.com/template-overviews/sb-admin-2/
 
 http://www.w3schools.com/bootstrap/bootstrap_ref_css_helpers.asp
 
-# Rodando a aplicação
+# Spring MVC
 
-`mvn jetty:run`
-
-Acesse o link: http://localhost:8080/app/index.html#/
-
-# Teste
-
-### Para rodar o teste, execute:
-`mvn test -P test`
-> O profile default não executa teste automaticamente. Isso foi feito para agilizar o build do projeto. `mvn test` sozinho irá skipped devido a configuração no surefire.
+http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html
 
 # Spring Repository
 
