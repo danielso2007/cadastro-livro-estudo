@@ -76,6 +76,7 @@ gulp.task('bower', function() {
 
 gulp.task('inject', function() {
     var target = gulp.src(paths.views.main);
+
     var sources = gulp.src([
       yeoman.app + 'public/vendor/**/*min.js',
       yeoman.app + 'public/vendor/**/*min.css',
@@ -84,7 +85,7 @@ gulp.task('inject', function() {
       yeoman.app + 'restrict/scripts/**/*.js'
     ], {read: false});
 
-    var option = {relative: true};
+    var option = {relative: false};
 
     return target.pipe(inject(sources, option)).pipe(gulp.dest(yeoman.app + '/restrict'));
 });
