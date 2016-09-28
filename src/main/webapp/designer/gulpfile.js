@@ -7,6 +7,7 @@ var lazypipe = require('lazypipe');
 var wiredep = require('wiredep').stream;
 var runSequence = require('run-sequence');
 var inject = require('gulp-inject');
+var debug = require('gulp-debug');
 
 var yeoman = {
     app: require('./bower.json').appPath || '../app',
@@ -77,15 +78,35 @@ gulp.task('bower', function() {
 gulp.task('inject', function() {
     var target = gulp.src(paths.views.main);
 
-    var sources = gulp.src([
-      yeoman.app + 'public/vendor/**/*min.js',
-      yeoman.app + 'public/vendor/**/*min.css',
-      yeoman.app + 'public/styles/*.css',
-      yeoman.app + 'restrict/scripts/*.js',
-      yeoman.app + 'restrict/scripts/**/*.js'
-    ], {read: false});
+    function transform (filepath) {
+        if (filepath.slice(-4) === '.css') {
+          return '<link rel="stylesheet" href="' + filepath.replace('public/','') + '">';
+        } else if (filepath.slice(-3) === '.js') {
+          return '<script src="' + filepath.replace('public/','') + '"></script>';
+        }
+        return inject.transform.apply(inject.transform, arguments);
+    };
 
-    var option = {relative: false};
+    var sources = gulp.src([
+      yeoman.app + '/public/vendor/**/*min.js',
+      yeoman.app + '/public/vendor/**/*min.css',
+      yeoman.app + '/public/styles/*.css',
+    ], {read: false, cwd: "../app/", ignorePath: '../public'});
+
+    var option = {relative: true, name: 'vendor', transform: transform};
+
+    return target.pipe(inject(sources, option)).pipe(gulp.dest(yeoman.app + '/restrict'));
+});
+
+gulp.task('inject:scripts', function() {
+    var target = gulp.src(paths.views.main);
+
+    var sources = gulp.src([
+      yeoman.app + '/restrict/scripts/*.js',
+      yeoman.app + '/restrict/scripts/**/*.js'
+    ], {read: false, cwd: "../app/"});
+
+    var option = {relative: true, name: 'scripts'};
 
     return target.pipe(inject(sources, option)).pipe(gulp.dest(yeoman.app + '/restrict'));
 });
@@ -133,7 +154,7 @@ gulp.copy = function(src, dest, base) {
     return gulp.src(src, {
             base: base
         })
-        .pipe(gulp.dest(dest));
+        .pipe(gulp.dest(dest)).pipe(debug());
 };
 
 gulp.task('default', ['bower'], function() {
