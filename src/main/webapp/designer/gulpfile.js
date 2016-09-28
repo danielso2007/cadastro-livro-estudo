@@ -1,11 +1,9 @@
-// Generated on 2016-09-21 using generator-angular 0.15.1
 'use strict';
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var openURL = require('open');
 var lazypipe = require('lazypipe');
-var rimraf = require('rimraf');
 var wiredep = require('wiredep').stream;
 var runSequence = require('run-sequence');
 var inject = require('gulp-inject');
@@ -16,7 +14,7 @@ var yeoman = {
 };
 
 var paths = {
-  scripts: [yeoman.app + '/scripts/**/*.js'],
+  scripts: [yeoman.app + '/restrict/scripts/**/*.js', yeoman.app + '/public/scripts/**/*.js'],
   styles: [yeoman.app + '/styles/**/*.css'],
   test: ['test/spec/**/*.js'],
   testRequire: [
@@ -31,8 +29,8 @@ var paths = {
   ],
   karma: 'karma.conf.js',
   views: {
-    main: yeoman.app + '/index.html',
-    files: [yeoman.app + '/views/**/*.html']
+    main: yeoman.app + '/restrict/index.html',
+    files: [yeoman.app + '/restrict/views/**/*.html']
   }
 };
 
@@ -51,9 +49,9 @@ gulp.task('lint:scripts', function () {
 // inject bower components
 gulp.task('bower', function () {
   var option = {
-               directory: './bower_components',
+               directory: '../app/public/lib',
          //      ignorePath: '..',
-               src: ['./bower_components/font-awesome/css/font-awesome.min.css'],
+               src: ['../app/public/lib/font-awesome/css/font-awesome.min.css'],
                html: {
                  block: /(([ \t]*)<!--\s*bower:*(\S*)\s*-->)(\n|\r|.)*?(<!--\s*endbower\s*-->)/gi,
                  detect: {
@@ -68,22 +66,17 @@ gulp.task('bower', function () {
              };
 
   return gulp.src(paths.views.main)
-    .pipe(wiredep(option)).pipe(gulp.dest(yeoman.app));
+    .pipe(wiredep(option)).pipe(gulp.dest(yeoman.app + '/restrict'));
 });
 
 gulp.task('inject', function () {
   var target = gulp.src(paths.views.main);
-  var sources = gulp.src(['./vendor/**/*min.js', './vendor/**/*min.css', './styles/**/*.css', yeoman.app + '/scripts/*.js', yeoman.app + '/scripts/**/*.js'], {read: false});
+  var sources = gulp.src(['./vendor/**/*min.js', './vendor/**/*min.css', './styles/**/*.css', yeoman.app + '/restrict/scripts/*.js', yeoman.app + '/restrict/scripts/**/*.js'], {read: false});
   var option = {relative: true};
 
-  return target.pipe(inject(sources, option)).pipe(gulp.dest(yeoman.app));
+  return target.pipe(inject(sources, option)).pipe(gulp.dest(yeoman.app + '/restrict'));
 });
 
-
-//gulp.task('html', function () {
-//  return gulp.src(yeoman.app + '/views/**/*')
-//    .pipe(gulp.dest(yeoman.dist + '/views'));
-//});
 
 gulp.task('images', function () {
   return gulp.src('./images/**/*')
@@ -95,12 +88,13 @@ gulp.task('images', function () {
     .pipe(gulp.dest(yeoman.app + '/images'));
 });
 
-gulp.task('copy:extras', function () {
-  return gulp.src(yeoman.app + '/*/.*', { dot: true }).pipe(gulp.dest(yeoman.dist));
+gulp.task('copy:libs', function () {
+  return gulp.copy(['./bower_components/**/*.css', './bower_components/**/*.js'], yeoman.app + '/public/lib');
 });
 
 gulp.copy=function(src,dest){
-    return gulp.src(src, {base:"."}).pipe(gulp.dest(dest));
+    return gulp.src(src, {base:"bower_components"})
+    .pipe(gulp.dest(dest));
 };
 
 gulp.task('default', ['bower'], function () {

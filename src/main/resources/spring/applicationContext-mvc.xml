@@ -9,8 +9,8 @@
 
 	<mvc:default-servlet-handler/>
 
-	<mvc:resources mapping="/app/**" location="/static/restrict/" />
+	<mvc:resources mapping="/app/**" location="/app/restrict/" />
 
-	<mvc:resources mapping="/**" location="/static/public/" />
+	<mvc:resources mapping="/**" location="/app/public/" />
 
 </beans>
