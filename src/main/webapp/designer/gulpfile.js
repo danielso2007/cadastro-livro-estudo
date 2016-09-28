@@ -49,24 +49,14 @@ gulp.task('lint:scripts', function () {
 // inject bower components
 gulp.task('bower', function () {
   var option = {
-               directory: '../app/public/lib',
-         //      ignorePath: '..',
-               src: ['../app/public/lib/font-awesome/css/font-awesome.min.css'],
-               html: {
-                 block: /(([ \t]*)<!--\s*bower:*(\S*)\s*-->)(\n|\r|.)*?(<!--\s*endbower\s*-->)/gi,
-                 detect: {
-                   js: /<script.*src=['"]([^'"]+)/gi,
-                   css: /<link.*href=['"]([^'"]+)/gi
-                 },
-                 replace: {
-                   js: '<script src="{{filePath}}"></script>',
-                   css: '<link href="{{filePath}}" rel="stylesheet" type="text/css" />'
-                 }
-               }
+               directory: yeoman.app + '/public/lib',
+               bowerJson: './bower.json',
+               src: [yeoman.app + '/public/lib' + '/font-awesome/css/font-awesome.min.css'],
+               cwd: paths.views.main,
+//               ignorePath: 'public/'
              };
 
-  return gulp.src(paths.views.main)
-    .pipe(wiredep(option)).pipe(gulp.dest(yeoman.app + '/restrict'));
+  return gulp.src(paths.views.main).pipe(wiredep(option)).pipe(gulp.dest(yeoman.app + '/restrict'));
 });
 
 gulp.task('inject', function () {
@@ -85,7 +75,7 @@ gulp.task('images', function () {
         progressive: true,
         interlaced: true
     })))
-    .pipe(gulp.dest(yeoman.app + '/images'));
+    .pipe(gulp.dest(yeoman.app + '/public/images'));
 });
 
 gulp.task('copy:libs', function () {

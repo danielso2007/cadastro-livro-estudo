@@ -3,4 +3,4 @@ target
 .idea
 /src/main/webapp/designer/bower_components/
 /src/main/webapp/designer/node_modules/
-/src/main/webapp/app/images/
+/src/main/webapp/app/public/images/
