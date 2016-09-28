@@ -31,19 +31,19 @@ function appConfigFn ($routeProvider, $ariaProvider, $httpProvider) {
     $httpProvider.interceptors.push(function($q, $rootScope) {
     		return {
     			'request': function(config) {
-    				console.log('request');
+    				$rootScope.progressbar.start();
     				return config || $q.when(config);
     			},
     			'requestError': function(rejection) {
-    				console.log('requestError');
+    				$rootScope.progressbar.complete();
     				return $q.reject(rejection);
     			},
     			'response': function(response) {
-    				console.log('response');
+    				$rootScope.progressbar.complete();
     				return response || $q.when(response);
     			},
     			'responseError': function(rejection) {
-    				console.log('responseError');
+    				$rootScope.progressbar.complete();
     				return $q.reject(rejection);
     			},
     		};
@@ -107,10 +107,10 @@ function appFn($rootScope, $scope, $location, ebookService, searchBookService, n
    $rootScope.listBook;
    $scope.search = function(value) {
       if (value) {
-          $scope.progressbar.start();
+          $rootScope.progressbar.start();
           searchBookService.searchBook({description:value},
               function(data){
-                 $scope.progressbar.complete();
+                 $rootScope.progressbar.complete();
                  $rootScope.listBook = angular.copy(data);
                  $location.path("/resultsearch")
                });

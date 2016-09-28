@@ -11,9 +11,7 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
     bookScope.searchBookService = new searchBookService();
 
     bookScope.save = function(){
-      $rootScope.progressbar.start();
       bookScope.book.$save(function(){
-          $rootScope.progressbar.complete();
           bookScope.book = new ebookService();
           bookScope.listBooks = ebookService.list();
       });
@@ -26,8 +24,6 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
     };
 
     bookScope.remove = function(){
-        $rootScope.progressbar.start();
-
         var promise =  ebookService.remove({id: bookScope.objectRemove.id}).$promise;
 
         promise.then(function(data) {
@@ -35,7 +31,6 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
             delete bookScope.objectRemove;
             delete bookScope.indexRemove;
             $('#removeDialog').modal('hide');
-            $rootScope.progressbar.complete();
         }).catch(function(response) {
             $('#removeDialog').modal('hide');
             $rootScope.progressbar.complete();
@@ -44,7 +39,6 @@ app_book.controller('EbookregisterCtrl', function (ebookService, searchBookServi
     };
 
     bookScope.edit = function(book){
-          $rootScope.progressbar.start();
           bookScope.book = book;
           bookScope.book.$update(function(){
             $rootScope.progressbar.complete();
