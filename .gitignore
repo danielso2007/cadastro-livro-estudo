@@ -4,3 +4,5 @@ target
 /src/main/webapp/designer/bower_components/
 /src/main/webapp/designer/node_modules/
 /src/main/webapp/app/public/images/
+/src/main/webapp/app/public/lib/
+/src/main/webapp/app/public/vendor/
