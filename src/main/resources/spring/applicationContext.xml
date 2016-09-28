@@ -13,6 +13,7 @@
 
     <bean id="propertyPlaceHolderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
 
+    <import resource="applicationContext-mvc.xml"/>
     <import resource="applicationContext-dozer.xml"/>
     <import resource="applicationContext-persistence.xml"/>
 </beans>
